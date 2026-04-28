@@ -3,14 +3,22 @@ print("------------------------------------")
 print("Pedidos acima de R$ 60 possuem 10% de desconto!")
 print("Cardapio\n\n(1)Hamburguer:R$ 20,00\n(2)Batata Frita:R$ 10,00\n(3)Refrigerante:R$ 7,00\n(4)Sorvete:R$ 5,00\n")
 
-pedido = int(input("Digite o código do produto, digite 0 para parar: "))
-quantidade = int(input("Digite a quantidade: "))
+
 
 carrinho = []
-
 total_pedido = 0
 
-while pedido != 0:
+while True: 
+    pedido  = int(input("Digite o código do produto, digite 0 para parar: "))
+
+    if pedido == 0:
+        break
+    if pedido not in [1,2,3,4]:
+        print("Informe um valor válido")
+        continue
+    
+    quantidade = int(input("Digite a quantidade: "))
+
     match pedido:
         case 1:
             for x in range(quantidade):
@@ -32,13 +40,8 @@ while pedido != 0:
                 carrinho.append("Sorvete")
             total = 5 * quantidade
             total_pedido = total_pedido + total
-
-    pedido = int(input("Digite o código do produto, digite 0 para parar: "))
-
-    if pedido == 0:
-        break
-    
-    quantidade = int(input("Digite a quantidade: "))
+        
+        
 
 if total_pedido > 60:
     total_pedido = total_pedido * 0.9
@@ -47,8 +50,7 @@ print(f'O total do pedido é R${total_pedido:.2f}')
 
 for item in set(carrinho):
     quantidade = carrinho.count(item)
-    if quantidade > 0:
-        print(f"Você comprou {quantidade} {item}(s)")
+print(f"Você comprou {quantidade} {item}(s)")
  
 # if carrinho.count("Hamburguer") > 0:
 #     print(f"Você comprou {carrinho.count('Hamburguer')} hambúrguer(es)")
