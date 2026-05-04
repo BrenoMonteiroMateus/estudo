@@ -1,6 +1,6 @@
-print("Olá sejam bem vindos a Mauá na Chapa")
-print("------------------------------------")
-print("Pedidos acima de R$ 60 possuem 10% de desconto!")
+print("\tOlá sejam bem vindos a Mauá na Chapa")
+print("-----------------------------------------------")
+print("Pedidos acima de R$ 60 possuem 10% de desconto!\n")
 print("Cardapio\n\n(1)Hamburguer:R$ 20,00\n(2)Batata Frita:R$ 10,00\n(3)Refrigerante:R$ 7,00\n(4)Sorvete:R$ 5,00\n")
 
 
@@ -9,15 +9,23 @@ carrinho = []
 total_pedido = 0
 
 while True: 
-    pedido  = int(input("Digite o código do produto, digite 0 para parar: "))
-
+    
+    try:        # Tenta converter a entrada do usuário para inteiro, evitando travamento com letras/espaços
+        pedido = int(input("Digite o código do produto, digite 0 para parar: "))
+    except ValueError:
+        print("Informe um número válido")
+        continue
     if pedido == 0:
         break
     if pedido not in [1,2,3,4]:
         print("Informe um valor válido")
         continue
     
-    quantidade = int(input("Digite a quantidade: "))
+    try:
+        quantidade = int(input("Digite a quantidade: "))
+    except ValueError:
+        print("Informe uma quantidade válida")
+        continue
 
     match pedido:
         case 1:
@@ -46,11 +54,13 @@ while True:
 if total_pedido > 60:
     total_pedido = total_pedido * 0.9
 
-print(f'O total do pedido é R${total_pedido:.2f}')
+print("\n\tRESUMO DO PEDIDO!")
+print("-----------------------------------")
+print(f'O total do pedido é R$ {total_pedido:.2f}')
 
 for item in set(carrinho):
     quantidade = carrinho.count(item)
-print(f"Você comprou {quantidade} {item}(s)")
+    print(f"Você comprou {quantidade} {item}(s)")
  
 # if carrinho.count("Hamburguer") > 0:
 #     print(f"Você comprou {carrinho.count('Hamburguer')} hambúrguer(es)")
@@ -62,4 +72,4 @@ print(f"Você comprou {quantidade} {item}(s)")
 #     print(f"Você comprou {carrinho.count('Refrigerante')} refrigerante(s)")
 
 # if carrinho.count("Sorvete") > 0:
-#     print(f"Você comprou {carrinho.count('Sorvete')} sorvete(s)")1
+#     print(f"Você comprou {carrinho.count('Sorvete')} sorvete(s)")
